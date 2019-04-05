@@ -71,6 +71,10 @@ model {
 			architecture 'x86_64'
 			operatingSystem 'osx'
 		}
+		freebsd64 {
+			architecture 'x86_64'
+			operatingSystem 'freebsd'
+		}
 	}	
 }
 
