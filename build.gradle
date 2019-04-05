@@ -38,6 +38,19 @@ allprojects {
 }
 
 /*********************************************************************************
+ *  Set Gradle repositories
+ *********************************************************************************/
+ext.HOME = System.getProperty('user.home')
+
+allprojects {
+	repositories {
+		mavenCentral()
+		jcenter()
+		flatDir name:'flat', dirs:["$HOME/flatrepo"]
+	}
+}
+
+/*********************************************************************************
  *  load properties from Ghidra/application.properties file
  *********************************************************************************/
 
@@ -58,7 +71,7 @@ apply from: "gradleScripts/setupJacoco.gradle" // Has a dependecy on ext vars in
  *		project.OS_NAMES.each {...}
  ****************************************************************************/
 
-project.ext.set("OS_NAMES", ["osx64", "win32", "win64", "linux64"])
+project.ext.set("OS_NAMES", ["osx64", "win32", "win64", "linux64", "freebsd64"])
 
 /*********************************************************************************
  * Imports
@@ -127,6 +140,19 @@ def isMac(String platformName) {
 def isWindows(String platformName) {
 
 	if (platformName.startsWith("win")) {
+		return true
+	}
+	else {
+		return false
+	}
+}
+
+/*********************************************************************************
+ * Returns true if the platform is a FreeBSD machine.
+ *********************************************************************************/
+def isFreeBSD(String platformName) {
+
+	if (platformName.startsWith("freebsd")) {
 		return true
 	}
 	else {
@@ -278,6 +304,11 @@ String getCurrentPlatformName() {
 	else if (osName.startsWith("Mac OS X")) {
 		if (isX86_64) {
 			return 'osx64'
+		}
+	}
+	else if (osName.startsWith("FreeBSD")) {
+		if (isX86_64) {
+			return 'freebsd64'
 		}
 	}
 	throw new GradleException("Unrecognized current platform -> osName = $osName, archName = $archName")
