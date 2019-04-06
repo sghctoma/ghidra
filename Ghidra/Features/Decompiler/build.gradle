@@ -75,8 +75,9 @@ task buildDecompilerDocumentationPdfs(type: Exec) {
 
 	// Check the OS before enabling task.
 	if (!(org.gradle.internal.os.OperatingSystem.current().isLinux() 
-		|| org.gradle.internal.os.OperatingSystem.current().isMacOsX())) {
-			println "The '$it.name' task only works on Linux or Mac Os X and is therefore disabled."
+		|| org.gradle.internal.os.OperatingSystem.current().isMacOsX()
+		|| org.gradle.internal.os.OperatingSystem.current().getName().contains("FreeBSD"))) {
+			println "The '$it.name' task only works on Linux, FreeBSD or Mac Os X and is therefore disabled."
 			it.enabled = false
 	}
 
