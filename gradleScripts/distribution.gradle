@@ -519,7 +519,7 @@ project.OS_NAMES.each { platform ->
 			/////////////////
 			// SUPPORT SCRIPTS
 			/////////////////
-			if( isLinux(platform) || isMac(platform) ) {
+			if( isLinux(platform) || isMac(platform) || isFreeBSD(platform) ) {
 			    with getMultiRepoCopySpec( "Ghidra/RuntimeScripts/Linux/support", "support" ) 
 			}
 			if( isWindows(platform) ) {
@@ -529,7 +529,7 @@ project.OS_NAMES.each { platform ->
 			/////////////////
 			// SERVER SCRIPTS
 			/////////////////
-			if( isLinux(platform) || isMac(platform) ) {
+			if( isLinux(platform) || isMac(platform) || isFreeBSD(platform) ) {
 				from (ROOT_PROJECT_DIR + "/Ghidra/RuntimeScripts/Linux/server") {
 					into "server"
 				}
@@ -543,7 +543,7 @@ project.OS_NAMES.each { platform ->
 			/////////////////
 			// GHIDRA RUN SCRIPT
 			/////////////////		
-			if( isLinux(platform) || isMac(platform) ) {
+			if( isLinux(platform) || isMac(platform) || isFreeBSD(platform) ) {
 				from (ROOT_PROJECT_DIR + "/Ghidra/RuntimeScripts/Linux") {
 					include "ghidraRun"
 				}
