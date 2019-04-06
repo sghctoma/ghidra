@@ -33,8 +33,12 @@ ifeq ($(OS),Darwin)
   OSDIR=osx64
 endif
 
-CC=gcc
-CXX=g++
+#ifeq ($(OS),FreeBSD)
+#	ADDITIONAL_FLAGS=-I/usr/local/include -L/usr/local/lib
+#endif
+
+CC=cc
+CXX=c++
 
 # Debug flags
 DBG_CXXFLAGS=-g -Wall -Wno-sign-compare
@@ -315,56 +319,56 @@ tags:
 com_dbg/depend:	$(COMMANDLINE_NAMES:%=%.cc)
 	mkdir -p com_dbg 
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(COMMANDLINE_DEBUG) $^ > $@.$$$$; \
+	$(CXX) -MM $(COMMANDLINE_DEBUG) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,com_dbg/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 com_opt/depend:	$(COMMANDLINE_NAMES:%=%.cc)
 	mkdir -p com_opt
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(COMMANDLINE_OPT) $^ > $@.$$$$; \
+	$(CXX) -MM $(COMMANDLINE_OPT) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,com_opt/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 ghi_dbg/depend:	$(GHIDRA_NAMES_DBG:%=%.cc)
 	mkdir -p ghi_dbg
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(GHIDRA_DEBUG) $^ > $@.$$$$; \
+	$(CXX) -MM $(GHIDRA_DEBUG) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,ghi_dbg/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 ghi_opt/depend:	$(GHIDRA_NAMES:%=%.cc)
 	mkdir -p ghi_opt 
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(GHIDRA_OPT) $^ > $@.$$$$; \
+	$(CXX) -MM $(GHIDRA_OPT) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,ghi_opt/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 sla_dbg/depend:	$(SLEIGH_NAMES:%=%.cc)
 	mkdir -p sla_dbg
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(SLEIGH_DEBUG) $^ > $@.$$$$; \
+	$(CXX) -MM $(SLEIGH_DEBUG) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,sla_dbg/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 sla_opt/depend:	$(SLEIGH_NAMES:%=%.cc)
 	mkdir -p sla_opt
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(SLEIGH_OPT) $^ > $@.$$$$; \
+	$(CXX) -MM $(SLEIGH_OPT) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,sla_opt/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 com_opt/depend.lib_sla:	$(LIBSLA_NAMES:%=%.cc)
 	mkdir -p com_opt
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(COMMANDLINE_OPT) $^ > $@.$$$$; \
+	$(CXX) -MM $(COMMANDLINE_OPT) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,com_opt/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
 com_dbg/depend.lib_sla:	$(LIBSLA_NAMES:%=%.cc)
 	mkdir -p com_dbg
 	@set -e; rm -f $@; \
-	$(CXX) -MM $(COMMANDLINE_DEBUG) $^ > $@.$$$$; \
+	$(CXX) -MM $(COMMANDLINE_DEBUG) -I/usr/local/include $^ > $@.$$$$; \
 	sed 's,\(.*\)\.o[ :]*,com_dbg/\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 

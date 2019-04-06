@@ -245,6 +245,7 @@ model {
 			targetPlatform "win64"
 			targetPlatform "linux64"
 			targetPlatform "osx64"
+			targetPlatform "freebsd64"
 			sources {
 				cpp {
 		            source {
@@ -342,6 +343,7 @@ model {
 			targetPlatform "win64"
 			targetPlatform "linux64"
 			targetPlatform "osx64"
+			targetPlatform "freebsd64"
 			sources {
 				cpp {
 					source {

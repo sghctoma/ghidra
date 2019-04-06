@@ -21,6 +21,9 @@
 #define __LOADIMAGE_BFD__
 
 #include "loadimage.hh"
+
+#define PACKAGE
+#define PACKAGE_VERSION
 #include <bfd.h>
 
 struct ImportRecord {
